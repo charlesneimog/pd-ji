@@ -88,6 +88,32 @@ def diamond(limit):
 
 
 # =============================================================================
+# =============================================================================
+def diamond_identities(identities):
+    """
+    Returns two lists of lists representing the otonality and utonality matrices of a Partch's diamond, but here you choose the identities.
+
+    Args:
+    - identities: One list of integers representing the identities of the diamond.
+
+    Returns:
+    - A list of two lists of lists of strings representing the otonality and utonality matrices of the diamond. The first list contains the otonality matrix, and the second list contains the utonality matrix.
+    """
+
+    otonal = []
+    utonal = []
+    for i in identities:
+        otonality = []
+        utonality = []
+        for j in identities:
+            otonality.append(f"{j}/{i}")
+            utonality.append(f"{i}/{j}")
+        otonal.append(otonality)
+        utonal.append(utonality)
+    return [otonal, utonal]
+
+
+# =============================================================================
 def octavereduce(ratios, octave):
     if octave is None:
         octave = 2
@@ -122,18 +148,82 @@ def octavereduce(ratios, octave):
         pd.error("octavereduce just accepts strings and floats")
 
 
+# =============================================================================
+def rangereduce(midicents, down, up):
+    """
+    Returns midicents inside some midicents range.
+
+    Args:
+    - midicents: A float or list of floats representing the MIDI cent values to be reduced to the range.
+    - down: An integer representing the lower bound of the range.
+    - up: An integer representing the upper bound of the range.
+
+    Returns:
+    - A float or list of floats representing the MIDI cent values inside the range.
+    """
+
+    
+    octaveRange = up - down
+    if (octaveRange < 1200):
+        pd.error("The difference between the up and down values must be at least 1200 cents")
+        return
+
+    if isinstance(midicents, list):
+        new_midicents = []
+        for midicent in midicents:
+            while True:
+                if midicent < down and midicent < up:
+                    midicent = midicent + 1200
+                elif midicent > up and midicent > down:
+                    midicent = midicent - 1200
+                else:
+                    break
+            new_midicents.append(midicent)
+        return new_midicents
+    elif isinstance(midicents, float):
+        while True:
+            if midicents <= down:
+                midicents = midicents + 1200
+            elif midicents >= up:
+                midicents = midicents - 1200
+            else:
+                break
+        return midicents 
+    else:
+        pd.error("rangereduce just accepts lists and floats")
+        return
 
 
+# =============================================================================
+def modulationnotes(ji_struc1, ji_struc2, cents):
+    
+    noteFounded = False
+    for ji_struc1_note in ji_struc1:
+        for ji_struc2_note in ji_struc2:
+            distance = abs(ji_struc1_note - ji_struc2_note)
+            if (distance < cents):
+                noteFounded = True
+                pd.print(f"The note {int(ji_struc1_note)} can be modulated to {int(ji_struc2_note)} with a distance of {int(distance)} cents")
+    if (noteFounded == False):
+        pd.error(f"No note can be modulated with a distance of {int(cents)} cents")
 
 
-
+# =============================================================================
 
 def py4pdLoadObjects():
-    pd.addobject(midicent2freq, "mc2f", pyout=True)
-    pd.addobject(freq2midicent, "f2mc", pyout=True)
-    pd.addobject(diamond, "diamond", pyout=True)
+
+    # Utilities
     pd.addobject(rt2mc, "rt2mc", pyout=True)
     pd.addobject(octavereduce, "octavereduce", pyout=True)
+    pd.addobject(rangereduce, "rangereduce", pyout=True)
+
+    # Harry Partch
+    pd.addobject(diamond, "diamond", pyout=True)
+    pd.addobject(diamond_identities, "diamond-identity", pyout=True)
+
+    # Modulation
+    pd.addobject(modulationnotes, "modulationnotes")
+    pd.addobject(modulationnotes, "modnotes")
 
                 
 
