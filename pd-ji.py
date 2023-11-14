@@ -50,8 +50,11 @@ def rt2mc(ratios, fund):
     elif isinstance(ratios, list):
         new_ratios = []
         for ratio in ratios:
-            num, den = ratio.split("/")
-            new_ratios.append(freq2midicent((int(num) / int(den)) * midicent2freq(fund)))
+            if isinstance(ratio, list):
+                new_ratios.append(rt2mc(ratio, fund))
+            else:
+                num, den = ratio.split("/")
+                new_ratios.append(freq2midicent((int(num) / int(den)) * midicent2freq(fund)))
         return new_ratios
     elif isinstance(ratios, int):
         return freq2midicent(ratios * midicent2freq(fund))
@@ -164,6 +167,13 @@ def rangereduce(midicents, down, up):
 
     
     octaveRange = up - down
+    valueToDecrease = octaveRange % 1200 
+    if (valueToDecrease != 0):
+        valueToDecrease = 1200
+    else:
+        valueToDecrease = octaveRange   
+
+
     if (octaveRange < 1200):
         pd.error("The difference between the up and down values must be at least 1200 cents")
         return
@@ -173,9 +183,9 @@ def rangereduce(midicents, down, up):
         for midicent in midicents:
             while True:
                 if midicent < down and midicent < up:
-                    midicent = midicent + 1200
+                    midicent = midicent + valueToDecrease
                 elif midicent > up and midicent > down:
-                    midicent = midicent - 1200
+                    midicent = midicent - valueToDecrease
                 else:
                     break
             new_midicents.append(midicent)
@@ -183,9 +193,9 @@ def rangereduce(midicents, down, up):
     elif isinstance(midicents, float):
         while True:
             if midicents <= down:
-                midicents = midicents + 1200
+                midicents = midicents + valueToDecrease
             elif midicents >= up:
-                midicents = midicents - 1200
+                midicents = midicents - valueToDecrease
             else:
                 break
         return midicents 
@@ -213,17 +223,17 @@ def modulationnotes(ji_struc1, ji_struc2, cents):
 def py4pdLoadObjects():
 
     # Utilities
-    pd.addobject(rt2mc, "rt2mc", pyout=True)
-    pd.addobject(octavereduce, "octavereduce", pyout=True)
-    pd.addobject(rangereduce, "rangereduce", pyout=True)
+    pd.add_object(rt2mc, "rt2mc", pyout=True)
+    pd.add_object(octavereduce, "octavereduce", pyout=True)
+    pd.add_object(rangereduce, "rangereduce", pyout=True)
 
     # Harry Partch
-    pd.addobject(diamond, "diamond", pyout=True)
-    pd.addobject(diamond_identities, "diamond-identity", pyout=True)
+    pd.add_object(diamond, "diamond", pyout=True)
+    pd.add_object(diamond_identities, "diamond-identity", pyout=True)
 
     # Modulation
-    pd.addobject(modulationnotes, "modulationnotes")
-    pd.addobject(modulationnotes, "modnotes")
+    pd.add_object(modulationnotes, "modulationnotes")
+    pd.add_object(modulationnotes, "modnotes")
 
                 
 
