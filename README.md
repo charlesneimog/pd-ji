@@ -6,7 +6,7 @@ This Library aim to create an environment for the microtonal music composition, 
 
 # Installation
 
-To install this library install PureData, then go to `Help`, `Find External` and Finally search for `pd-ji` and install it.
+To install this library install PureData, then go to `Help`, `Find External` and Finally search for `py4pd-ji` and install it.
 
 * ⚠️ *Attention!* ⚠️ Make sure you have installed the latest version of `py4pd` and Python before running this code.
 
