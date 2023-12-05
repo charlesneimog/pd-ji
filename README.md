@@ -1,4 +1,4 @@
-# Pd-Just Intonation
+# Just Intonation in PureData Enviroment
 This Library aim to create an environment for the microtonal music composition, mainly for Just Intonation composition. This library constructs the theory of Harry Partch, Erv Wilson, and Ben Johnston. It is a translation of [om-ji](https://github.com/charlesneimog/om-ji).
 
 **Cite this repository:** [![DOI](https://zenodo.org/badge/214263190.svg)](https://zenodo.org/badge/latestdoi/214263190)
