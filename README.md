@@ -1,4 +1,4 @@
-# Pd-Just Intonation
+# Just Intonation in PureData Enviroment
 This Library aim to create an environment for the microtonal music composition, mainly for Just Intonation composition. This library constructs the theory of Harry Partch, Erv Wilson, and Ben Johnston. It is a translation of [om-ji](https://github.com/charlesneimog/om-ji).
 
 **Cite this repository:** [![DOI](https://zenodo.org/badge/214263190.svg)](https://zenodo.org/badge/latestdoi/214263190)
@@ -6,7 +6,7 @@ This Library aim to create an environment for the microtonal music composition, 
 
 # Installation
 
-To install this library install PureData, then go to `Help`, `Find External` and Finally search for `pd-ji` and install it.
+To install this library install PureData, then go to `Help`, `Find External` and Finally search for `py4pd-ji` and install it.
 
 * ⚠️ *Attention!* ⚠️ Make sure you have installed the latest version of `py4pd` and Python before running this code.
 
