@@ -1,6 +1,7 @@
-import pd
 import math
-from typing import Union, List
+from typing import List, Union
+
+import pd
 
 
 def midicent2freq(midicent: float) -> float:
@@ -223,13 +224,13 @@ def modulationnotes(ji_struc1, ji_struc2, cents):
 def py4pdLoadObjects():
 
     # Utilities
-    pd.add_object(rt2mc, "rt2mc", pyout=True)
-    pd.add_object(octavereduce, "octavereduce", pyout=True)
-    pd.add_object(rangereduce, "rangereduce", pyout=True)
+    pd.add_object(rt2mc, "rt2mc", py_out=True)
+    pd.add_object(octavereduce, "octavereduce", py_out=True)
+    pd.add_object(rangereduce, "rangereduce", py_out=True)
 
     # Harry Partch
-    pd.add_object(diamond, "diamond", pyout=True)
-    pd.add_object(diamond_identities, "diamond-identity", pyout=True)
+    pd.add_object(diamond, "diamond", py_out=True)
+    pd.add_object(diamond_identities, "diamond-identity", py_out=True)
 
     # Modulation
     pd.add_object(modulationnotes, "modulationnotes")

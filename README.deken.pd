@@ -1,4 +1,4 @@
-#N canvas 868 169 735 747 8;
+#N canvas 868 169 371 443 8;
 #X obj 4 95 py4pd;
 #N canvas 0 32 1375 516 links 0;
 #X obj 36 176 pdcontrol;
@@ -15,7 +15,7 @@
 #X connect 5 0 0 0;
 #X connect 6 0 0 0;
 #X restore 3 167 pd links;
-#X text 133 352 by Charles K. Neimog;
+#X text 53 353 by Charles K. Neimog;
 #X obj 4 144 bng 20 250 50 0 howinstallpython howinstallpythonr empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X text 89 2 Welcome to the pd-ji documentation!, f 36;
 #X text 1 26 This Library aim to create an environment for the microtonal music composition \, mainly for Just Intonation composition. This library constructs the theory of Harry Partch \, Erv Wilson \, and Ben Johnston. It is a translation of om-ji from OpenMusic., f 71;
